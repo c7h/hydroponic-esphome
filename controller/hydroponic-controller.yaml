@@ -1,0 +1,35 @@
+esphome:
+  name: roofwaterfarm-hydroponic
+
+esp32:
+  board: esp32dev
+  framework:
+    type: arduino
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  password: ""
+
+ota:
+  password: !secret ota_password
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Roofwaterfarm-Hydroponic"
+    password: !secret ap_password
+
+captive_portal:
+
+
+sensor:
+  - platform: ultrasonic
+    trigger_pin: 18
+    echo_pin: 19
+    name: "Watertank Filling Level" 
