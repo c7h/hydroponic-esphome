@@ -10,8 +10,14 @@ esp32:
 logger:
 
 # Enable Home Assistant API
-api:
-  password: ""
+#api:
+#  password: ""
+
+mqtt:
+  broker: broker.hivemq.com
+  #username: ""
+  #password: !secret mqtt_password
+  discovery: true
 
 ota:
   password: !secret ota_password
@@ -32,4 +38,12 @@ sensor:
   - platform: ultrasonic
     trigger_pin: 18
     echo_pin: 19
-    name: "Watertank Filling Level" 
+    name: "Watertank Filling Level"
+
+  - platform: dht
+    pin: 13
+    temperature:
+      name: "Control Box Temperature"
+    humidity:
+      name: "Control Box Humidity"
+    update_interval: 60s
