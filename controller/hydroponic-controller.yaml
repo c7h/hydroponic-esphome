@@ -14,10 +14,13 @@ logger:
 #  password: ""
 
 mqtt:
-  broker: broker.hivemq.com
+  broker: 141.145.199.142
   #username: ""
   #password: !secret mqtt_password
   discovery: true
+
+web_server:
+  port: 80
 
 ota:
   password: !secret ota_password
@@ -33,7 +36,6 @@ wifi:
 
 captive_portal:
 
-
 sensor:
   - platform: ultrasonic
     trigger_pin: 18
@@ -47,3 +49,25 @@ sensor:
     humidity:
       name: "Control Box Humidity"
     update_interval: 60s
+
+  - platform: adc
+    pin: GPIO34
+    name: "Water Flow Level 1"
+    update_interval: 5s
+    unit_of_measurement: "V"
+    #unit_of_measurement: "%"
+    #filters:
+    #- median:
+    #    window_size: 7
+    #    send_every: 4
+    #    send_first_at: 1
+    #- calibrate_linear:
+    #    - 0.85 -> 0.00
+    #    - 0.44 -> 100.00
+    #- lambda: if (x < 1) return 0; else return (x);
+    accuracy_decimals: 2
+
+switch:
+  - platform: gpio
+    name: "Pump"
+    pin: 14
