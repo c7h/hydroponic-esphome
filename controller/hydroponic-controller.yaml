@@ -36,7 +36,20 @@ wifi:
 
 captive_portal:
 
+i2c:
+  sda: 21
+  scl: 22
+  scan: true
+  id: bus_a
+
+
 sensor:
+  - platform: bh1750
+    name: "Illuminance"
+    address: 0x23
+    update_interval: 60s
+
+
   - platform: ultrasonic
     trigger_pin: 18
     echo_pin: 19
@@ -70,4 +83,9 @@ sensor:
 switch:
   - platform: gpio
     name: "Pump"
-    pin: 14
+    pin: GPIO14
+
+light:
+  - platform: status_led
+    name: "Switch state"
+    pin: GPIO12
