@@ -19,8 +19,6 @@ mqtt:
   #password: !secret mqtt_password
   discovery: true
 
-web_server:
-  port: 80
 
 ota:
   password: !secret ota_password
@@ -65,8 +63,8 @@ sensor:
 
   - platform: adc
     pin: GPIO34
-    name: "Water Flow Level 1"
-    update_interval: 5s
+    name: "ACS712 Engergy Meter"
+    update_interval: 60s
     unit_of_measurement: "V"
     #unit_of_measurement: "%"
     #filters:
@@ -84,8 +82,28 @@ switch:
   - platform: gpio
     name: "Pump"
     pin: GPIO14
+    inverted: true
+    id: pump
+
 
 light:
   - platform: status_led
     name: "Switch state"
     pin: GPIO12
+
+
+#time:
+#  # This should switch the pump on and off in intervals.
+#  - platform: sntp
+#    on_time:
+#
+#      - seconds: /20
+#        then:
+#          - switch.toggle: pump
+#
+#      - cron: "* 0 7 * * *"
+#        then:
+#          - switch.turn_on: pump
+#      - cron: "* 0 20 * * *"
+#        then:
+#          - switch.turn_off: pump
