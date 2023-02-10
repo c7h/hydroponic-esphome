@@ -1,0 +1,7 @@
+homeassistant:
+  image: "ghcr.io/home-assistant/home-assistant:stable"
+  volumes:
+    - ./:/config
+    - /etc/localtime:/etc/localtime:ro
+  ports:
+    - '8123:8123'
